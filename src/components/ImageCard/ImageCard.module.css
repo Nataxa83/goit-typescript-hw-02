@@ -1,0 +1,45 @@
+.imageCard{ 
+    width: 270px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: #222 solid 1px;
+    border-radius: 15px ;
+    background-color: aliceblue;
+
+}
+
+.imageCard:hover {
+    transform: scale(1.03, 1.04);
+    transition: all 1s ;
+}
+
+.image{ 
+    width: 250px;
+    height: 150px;
+    object-fit: cover;  
+    cursor: pointer;
+}
+
+.info {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.infoTerm{
+    font-size: 14px;
+    color: #e99132;
+    font-weight: 500;
+   
+}
+
+.data{
+    font-size: 14px;
+}

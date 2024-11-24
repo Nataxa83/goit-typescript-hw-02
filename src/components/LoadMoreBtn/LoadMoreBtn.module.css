@@ -1,0 +1,16 @@
+.btnLoadMore{
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    background-color: rgb(248, 150, 115);
+    cursor: pointer;
+    border: none;
+    margin-top: 15px;
+}
+
+.btnLoadMore:hover{
+    background-color: rgb(244, 203, 150);
+}
