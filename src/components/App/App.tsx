@@ -1,37 +1,47 @@
 import { useEffect, useState } from "react";
-import { renderImage } from "./api";
-import { toast } from "react-hot-toast";
+import { renderImage } from "../../api";
+import { toast, Toaster } from "react-hot-toast";
 
-import SearchBar from "./components/SearchBar/SearchBar";
-import Loader from "./components/Loader/Loader";
-import ImageGallery from "./components/ImageGallery/ImageGallery";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage";  
-import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
-import ImageModal from "./components/ImageModal/ImageModal";
+import SearchBar from "../SearchBar/SearchBar";
+import Loader from "../Loader/Loader";
+import ImageGallery from "../ImageGallery/ImageGallery";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";  
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "../ImageModal/ImageModal";
+import { Image } from "../types";
 
-const App = () => {
-  const [images, setImages] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [searchValue, setSearchValue] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);  
-  const [totalPages, setTotalPages] = useState(0);
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+
+// interface ImageData {
+//   total: number;
+//   total_pages: number;
+//   results: Image[];
+// }
   
-  const onSearch = (searchWord) => {
+
+const App: React.FC = () => {
+  const [images, setImages] = useState <Image[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [pageNumber, setPageNumber] = useState<number>(1);  
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
+  
+  const onSearch = (searchWord:string) => {
     setImages([]);
     setPageNumber(1);
     setSearchValue(searchWord);
   };
 
-  const onLoadMore = () => {
+  const onLoadMore = ()  => {
     setPageNumber((pageNumber) => pageNumber + 1);
     console.log(pageNumber);
   }
 
-  const openModal = () => {
+  const openModal = (image: Image) => {
     setIsOpenModal(true);
+    setSelectedImage(image);
   };
 
   const closeModal = () => {
@@ -48,7 +58,7 @@ const App = () => {
       // throw new Error('Something went wrong');
       
       
-      setImages((prevState) => pageNumber === 1 ? data.results : [...prevState, ...data.results]);
+      setImages((prevImages) => pageNumber === 1 ? data.results : [...prevImages, ...data.results]);
       setTotalPages(data.total_pages);
       
       if (data.total_pages === 0) {
@@ -62,7 +72,7 @@ const App = () => {
       
 
       } catch (error) {
-    setError(error.message);
+    setError((error as Error).message);
       } finally{
     setLoading(false);
       }
@@ -74,11 +84,13 @@ const App = () => {
 
   return (
     <div>
+      <Toaster />
       <SearchBar onSearch={onSearch} />
       {error !== null && <ErrorMessage error={error}/> }
      
      { (images !== null && images.length > 0) &&  
-     <ImageGallery images={images}
+     <ImageGallery 
+     images={images}
      openModal={openModal}
      setSelectedImage={setSelectedImage}/> }
 
@@ -89,7 +101,8 @@ const App = () => {
      {<ImageModal
         isOpenModal={isOpenModal}
         closeModal={closeModal}
-        {...selectedImage}
+        // {...selectedImage}
+        modalData={selectedImage as Image}
 
       />}
      
