@@ -25,7 +25,6 @@ interface ImageModalProps {
 }
 
 const ImageModal: React.FC<ImageModalProps> = ({ isOpenModal, closeModal, modalData}) => {
-  //{console.log({regular})}
   return (
 <Modal
         isOpen={isOpenModal}
@@ -34,11 +33,11 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpenModal, closeModal, modalD
         contentLabel="Example Modal"
         className={css.modal}
         >
-       <img className={css.modalImg} src={modalData.urls?.regular} alt={modalData.description} />
+       <img className={css.modalImg} src={modalData?.urls.regular} alt={modalData?.description} />
         <div className={css.info}>
-          <p className={css.data}><span className={css.infoTerm}>Location:</span> {modalData.user.location}</p>
-          <img className= {css.userPhoto}src={modalData.user.profile_image.medium} alt="users photo" />
-          <p className={css.data}><span className={css.infoTerm}>Name:</span> {modalData.user.name}</p>
+          <p className={css.data}><span className={css.infoTerm}>Location:</span> {modalData?.user.location}</p>
+          <img className= {css.userPhoto}src={modalData?.user.profile_image.medium} alt="users photo" />
+          <p className={css.data}><span className={css.infoTerm}>Name:</span> {modalData?.user.name}</p>
         </div>
 </Modal>
 );  };

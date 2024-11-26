@@ -20,12 +20,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       });
       return;
     }  
-    
-    
     onSearch(userValue);              
     form.reset();
   };
-
   
   return (
     <>

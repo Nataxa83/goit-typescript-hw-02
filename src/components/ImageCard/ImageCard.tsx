@@ -8,7 +8,6 @@ interface ImageCardProps {
   openModal: (image: Image) => void;
 }
 
-// const ImageCard = ({small, regular, description, likes, location, name, medium, setSelectedImage, openModal}: ImageCardProps): JSX.Element => {
 const ImageCard: React.FC<ImageCardProps> = ({image, setSelectedImage, openModal}) => {
   const handleClick = (): void => {
     setSelectedImage(image);

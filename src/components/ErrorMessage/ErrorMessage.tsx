@@ -3,7 +3,6 @@ import css from "./ErrorMessage.module.css"
 interface ErrorProps {
   error: string
 }
-
 const ErrorMessage: React.FC<ErrorProps> = ({error}) => {
   return (
     <p className={css.errorMessage}>Oops, something went wrong: 

@@ -1,7 +1,7 @@
 import { ThreeCircles } from "react-loader-spinner"
 import css from "./Loader.module.css"
 
-const Loader = (): JSX.Element => {
+const Loader: React.FC = () => {
   return (
     <div className={css.loader}> <ThreeCircles
     visible={true}

@@ -11,13 +11,6 @@ import ImageModal from "../ImageModal/ImageModal";
 import { Image } from "../types";
 
 
-// interface ImageData {
-//   total: number;
-//   total_pages: number;
-//   results: Image[];
-// }
-  
-
 const App: React.FC = () => {
   const [images, setImages] = useState <Image[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -57,7 +50,6 @@ const App: React.FC = () => {
       const data = await renderImage(searchValue, pageNumber);
       // throw new Error('Something went wrong');
       
-      
       setImages((prevImages) => pageNumber === 1 ? data.results : [...prevImages, ...data.results]);
       setTotalPages(data.total_pages);
       
@@ -69,8 +61,6 @@ const App: React.FC = () => {
         });
         return;
       }
-      
-
       } catch (error) {
     setError((error as Error).message);
       } finally{
@@ -80,7 +70,6 @@ const App: React.FC = () => {
     
     fetchImageByValue();
     },[searchValue, pageNumber]);
-
 
   return (
     <div>
@@ -101,7 +90,6 @@ const App: React.FC = () => {
      {<ImageModal
         isOpenModal={isOpenModal}
         closeModal={closeModal}
-        // {...selectedImage}
         modalData={selectedImage as Image}
 
       />}
